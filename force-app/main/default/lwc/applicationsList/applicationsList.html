@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="My Job Applications" icon-name="standard:list">
+        <div class="slds-p-around_medium">
+
+            <!-- Status filter -->
+            <lightning-combobox
+                label="Filter by Status"
+                value={filterStatus}
+                options={filterOptions}
+                onchange={handleFilter}>
+            </lightning-combobox>
+
+            <!-- Loading spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+
+            <!-- Error message -->
+            <template if:true={error}>
+                <p class="slds-text-color_error">Error loading applications.</p>
+            </template>
+
+            <!-- Data table -->
+            <template if:true={filteredApplications}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={filteredApplications}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

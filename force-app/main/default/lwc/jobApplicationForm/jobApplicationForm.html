@@ -1,0 +1,77 @@
+<template>
+    <lightning-card title="Submit Job Application" icon-name="standard:opportunity">
+        <div class="slds-p-around_medium">
+
+            <!-- Company Name -->
+            <lightning-input
+                label="Company Name"
+                placeholder="e.g. Google"
+                value={companyName}
+                onchange={handleCompanyName}
+                required>
+            </lightning-input>
+
+            <!-- Job Title -->
+            <lightning-input
+                label="Job Title"
+                placeholder="e.g. Salesforce Developer"
+                value={jobTitle}
+                onchange={handleJobTitle}
+                required>
+            </lightning-input>
+
+            <!-- Company Domain -->
+            <lightning-input
+                label="Company Domain"
+                placeholder="e.g. google.com"
+                value={companyDomain}
+                onchange={handleCompanyDomain}
+                required>
+            </lightning-input>
+
+            <!-- Application Status -->
+            <lightning-combobox
+                label="Application Status"
+                value={status}
+                options={statusOptions}
+                onchange={handleStatus}
+                required>
+            </lightning-combobox>
+
+            <!-- Submit button row -->
+            <div class="slds-m-top_medium slds-grid slds-grid_vertical-align-center">
+
+                <lightning-button
+                    label={buttonLabel}
+                    variant="brand"
+                    onclick={handleSubmit}
+                    disabled={isLoading}>
+                </lightning-button>
+
+                <!-- Spinner shown while saving -->
+                <template if:true={isLoading}>
+                    <div class="slds-m-left_small">
+                        <lightning-spinner
+                            alternative-text="Saving application..."
+                            size="small">
+                        </lightning-spinner>
+                    </div>
+                </template>
+
+            </div>
+
+            <!-- Success confirmation message -->
+            <template if:true={successMessage}>
+                <div class="slds-m-top_medium slds-box slds-theme_success slds-theme_alert-texture">
+                    <p class="slds-text-body_regular">
+                        {successMessage}
+                    </p>
+                    <p class="slds-text-body_small slds-m-top_xx-small">
+                        Company enrichment data will appear in the list below within 10 seconds.
+                    </p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
